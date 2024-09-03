@@ -85,6 +85,8 @@
         SVGKitLogWarn(@"[%@] WARNING: you have initialized an [%@] with a blank image (nil). Possibly because you're using Storyboards or NIBs which Apple won't allow us to decorate. Make sure you assign an SVGKImage to the .image property!", [self class], [self class]);
 #if SVGKIT_UIKIT
 		self.backgroundColor = [UIColor clearColor];
+#elif TARGET_OS_VISION
+        self.backgroundColor = [UIColor clearColor];
 #else
         self.layer.backgroundColor = [NSColor clearColor].CGColor;
 #endif
@@ -102,6 +104,8 @@
 	{
 #if SVGKIT_UIKIT
 		self.backgroundColor = [UIColor clearColor];
+#elif TARGET_OS_VISION
+        self.backgroundColor = [UIColor clearColor];
 #else
         self.layer.backgroundColor = [NSColor clearColor].CGColor;
 #endif

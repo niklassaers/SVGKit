@@ -71,6 +71,8 @@
     self.tileRatio = CGSizeZero;
 #if SVGKIT_UIKIT
     self.backgroundColor = [UIColor clearColor];
+#elif TARGET_OS_VISION
+    self.backgroundColor = [UIColor clearColor];
 #else
     self.layer.backgroundColor = [NSColor clearColor].CGColor;
 #endif
@@ -168,6 +170,8 @@
 		[self.image.CALayerTree removeFromSuperlayer]; // force apple to redraw?
 #if SVGKIT_UIKIT
 		[self setNeedsDisplay];
+#elif TARGET_OS_VISION
+        [self setNeedsDisplay];
 #else
         [self setNeedsDisplay:YES];
 #endif
@@ -181,6 +185,8 @@
 		{
 #if SVGKIT_UIKIT
 			[self setNeedsDisplay];
+#elif TARGET_OS_VISION
+            [self setNeedsDisplay];
 #else
             [self setNeedsDisplay:YES];
 #endif
@@ -289,6 +295,8 @@
 	//DEBUG: SVGKitLogVerbose(@"cols, rows: %i, %i ... scaleConvert: %@ ... tilesize: %@", cols, rows, NSStringFromCGSize(scaleConvertImageToView), NSStringFromCGSize(tileSize) );
 	/** To support tiling, and to allow internal shrinking, we use renderInContext */
 #if SVGKIT_UIKIT
+    CGContextRef context = UIGraphicsGetCurrentContext();
+#elif TARGET_OS_VISION
     CGContextRef context = UIGraphicsGetCurrentContext();
 #else
     CGContextRef context = SVGKGraphicsGetCurrentContext();

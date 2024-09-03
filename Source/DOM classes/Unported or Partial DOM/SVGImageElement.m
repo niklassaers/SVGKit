@@ -15,6 +15,8 @@ CGImageRef SVGImageCGImage(UIImage *img)
 {
 #if SVGKIT_UIKIT
     return img.CGImage;
+#elif TARGET_OS_VISION
+    return img.CGImage;
 #else
     CGImageRef cgImage = [img CGImageForProposedRect:NULL context:nil hints:nil];
     return cgImage;
